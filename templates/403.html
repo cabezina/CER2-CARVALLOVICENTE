@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Acceso denegado (403)</h2>
+<p>No tienes permisos para hacer esta operación.</p>
+<a href="{% url 'home' %}" class="btn btn-primary">Volver al inicio</a>
+{% endblock %}

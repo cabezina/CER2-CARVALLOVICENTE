@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ lugar.imagen }}" class="img-fluid rounded" alt="{{ lugar.nombre }}">
+    </div>
+    <div class="col-md-6">
+        <h2>{{ lugar.nombre }}</h2>
+        <p><b>Categoría:</b> {{ lugar.categoria.nombre }}</p>
+        <p><b>Ubicación:</b> {{ lugar.ubicacion }}</p>
+        <p><b>Año de construcción:</b> {{ lugar.anio_construccion }}</p>
+        <p>{{ lugar.descripcion }}</p>
+
+        {% if perms.catalogo.change_lugarpatrimonial %}
+            <a href="{% url 'editar_lugar' lugar.id %}" class="btn btn-warning">Editar</a>
+        {% endif %}
+        <a href="{% url 'catalogo' %}" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
+{% endblock %}

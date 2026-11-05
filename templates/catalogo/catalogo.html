@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Catálogo patrimonial</h2>
+
+<div class="mb-4">
+    <a href="{% url 'catalogo' %}" class="btn btn-outline-secondary btn-sm">Todas</a>
+    {% for c in categorias %}
+        <a href="{% url 'categoria' c.id %}" class="btn btn-outline-secondary btn-sm">{{ c.nombre }}</a>
+    {% endfor %}
+</div>
+
+{% if categoria_actual %}
+    <h4>Categoría: {{ categoria_actual.nombre }}</h4>
+    <p>{{ categoria_actual.descripcion }}</p>
+{% endif %}
+
+<div class="row">
+    {% for lugar in lugares %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <img src="{{ lugar.imagen }}" class="card-img-top" alt="{{ lugar.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ lugar.nombre }}</h5>
+                <p class="card-text">{{ lugar.ubicacion }}</p>
+                <span class="badge bg-secondary">{{ lugar.categoria.nombre }}</span>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'detalle' lugar.id %}" class="btn btn-primary btn-sm">Ver detalle</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p>No hay lugares registrados.</p>
+    {% endfor %}
+</div>
+{% endblock %}
